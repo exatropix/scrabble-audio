@@ -1,0 +1,1 @@
+Sons du jeu, au format WAV. Vous pouvez remplacer chaque fichier par le vôtre en gardant le même nom : distribution, pose, erreur, ordinateur, fin, bord, selection.
