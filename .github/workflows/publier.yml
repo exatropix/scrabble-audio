@@ -1,0 +1,26 @@
+# Publie une version : onglet Actions, « Publier une version », « Run workflow », puis le numéro (par exemple 2.1).
+# Les fichiers mis en téléchargement sont ceux du dossier publication (le jeu et les trois dictionnaires).
+# Les notes de version viennent du fichier publication/notes.md.
+name: Publier une version
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Numéro de version, par exemple 2.1"
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  publier:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Créer la version et joindre les fichiers
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          V="${{ inputs.version }}"
+          gh release create "v$V" publication/*.zip --target "$GITHUB_SHA" --title "Scrabble audio $V" --notes-file publication/notes.md

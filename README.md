@@ -45,6 +45,10 @@ Le code source est dans le dossier `source` (C#, Windows Forms, .NET Framework 4
 `csc /target:winexe /out:ScrabbleAudio.exe /r:System.Windows.Forms.dll /r:System.Drawing.dll source\App\*.cs source\Core\*.cs`
 Placez à côté de l'exécutable le dossier sons et les fichiers nvdaControllerClient32.dll et nvdaControllerClient64.dll, fournis dans le zip du jeu.
 
+## Publier une nouvelle version
+
+Onglet Actions, « Publier une version », « Run workflow », puis le numéro (par exemple 2.2). GitHub met en téléchargement les fichiers du dossier `publication`, avec les notes de `publication/notes.md`.
+
 ## Licences
 
 - Le code de ce projet est versé dans le domaine public (voir LICENSE).
