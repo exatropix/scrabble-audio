@@ -481,6 +481,15 @@ namespace ScrabbleAudio
             if (!ctrl && code == Keys.Home) { colonne = 0; Parole.Dire(DecrireCase(ligne, colonne)); zone.Invalidate(); return true; }
             if (!ctrl && code == Keys.End) { colonne = Plateau.Taille - 1; Parole.Dire(DecrireCase(ligne, colonne)); zone.Invalidate(); return true; }
             if (!ctrl && code == Keys.Space) { Parole.Dire(enAttente != null ? EpelerAttente() : DecrireCase(ligne, colonne)); return true; }
+            if (!ctrl && code == Keys.Enter && enAttente == null)
+            {
+                // En colonne 1 : toute la ligne. En ligne A : toute la colonne. En A1 : les deux. Ailleurs : la case.
+                if (colonne == 0 && ligne == 0) Parole.Dire(partie.Plateau.DecrireLigne(ligne, true) + " " + partie.Plateau.DecrireLigne(colonne, false));
+                else if (colonne == 0) Parole.Dire(partie.Plateau.DecrireLigne(ligne, true));
+                else if (ligne == 0) Parole.Dire(partie.Plateau.DecrireLigne(colonne, false));
+                else Parole.Dire(DecrireCase(ligne, colonne));
+                return true;
+            }
             if (!ctrl && code == Keys.L) { Parole.Dire(partie.Plateau.DecrireLigne(ligne, true)); return true; }
             if (!ctrl && code == Keys.C) { Parole.Dire(partie.Plateau.DecrireLigne(colonne, false)); return true; }
             if (ctrl && code == Keys.V) { CollerPlateau(); return true; }

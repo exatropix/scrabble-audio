@@ -5,7 +5,7 @@ namespace ScrabbleAudio
     static class Aide
     {
         const string TexteFr =
-@"SCRABBLE AUDIO, VERSION 2.0
+@"SCRABBLE AUDIO, VERSION 2.1
 
 Ce jeu se joue entièrement au clavier. Tout ce qu'il annonce passe par votre lecteur d'écran, NVDA ou JAWS, avec votre voix habituelle. Sans lecteur d'écran, la voix de Windows prend le relais.
 Appuyez sur Échap pour fermer cette aide.
@@ -50,7 +50,8 @@ SUR LE PLATEAU
 Les lignes sont nommées de A à O, de haut en bas. Les colonnes sont numérotées de 1 à 15, de gauche à droite. La case centrale est H8.
 Flèches : se déplacer d'une case. Chaque case est annoncée, par exemple : H8, vide, mot compte double, ou : H9, A.
 Ctrl+flèche : sauter jusqu'à la prochaine lettre posée dans cette direction.
-L : lire toute la ligne. C : lire toute la colonne.
+Entrée : en colonne 1, lit toute la ligne ; en ligne A, lit toute la colonne ; en A1, les deux. Début vous amène en colonne 1. Si un mot attend d'être validé, Entrée le valide.
+L : lire toute la ligne. C : lire toute la colonne, où que vous soyez.
 Placez-vous sur la case de départ, puis Ctrl+V pour poser les lettres copiées. Un menu demande le sens : Horizontal ou Vertical. Les touches H et V choisissent directement.
 Le jeu place vos lettres en sautant les cases déjà occupées. Par exemple, pour écrire MAISON en croisant un A déjà posé, sélectionnez M, I, S, O, N sur le chevalet, copiez-les, placez-vous sur la case du M, et collez.
 Si vous collez un joker, le jeu vous demande quelle lettre il remplace.
@@ -88,7 +89,7 @@ Les sons se trouvent dans le dossier sons. Vous pouvez remplacer chaque fichier 
 ";
 
         const string TexteEn =
-@"SCRABBLE AUDIO, VERSION 2.0
+@"SCRABBLE AUDIO, VERSION 2.1
 
 This game is played entirely from the keyboard. Everything it says goes through your screen reader, NVDA or JAWS, with your usual voice. Without a screen reader, the Windows voice takes over.
 Press Escape to close this help.
@@ -133,7 +134,8 @@ ON THE BOARD
 Rows are named A to O, from top to bottom. Columns are numbered 1 to 15, from left to right. The centre square is H8.
 Arrows: move one square. Each square is announced, for example: H8, empty, double word score, or: H9, A.
 Ctrl+arrow: jump to the next placed letter in that direction.
-L: read the whole row. C: read the whole column.
+Enter: in column 1, reads the whole row; in row A, reads the whole column; in A1, both. Home takes you to column 1. If a word is waiting to be confirmed, Enter confirms it.
+L: read the whole row. C: read the whole column, wherever you are.
 Go to the starting square, then Ctrl+V to place the copied letters. A menu asks for the direction: Horizontal or Vertical. The H and V keys choose directly.
 The game places your letters, skipping squares that are already taken. For example, to write HOUSE across an O already on the board, select H, U, S, E on the rack, copy them, go to the square of the H, and paste.
 If you paste a blank, the game asks which letter it stands for.
@@ -170,7 +172,7 @@ The sounds are in the sons folder. You can replace each file with your own, keep
 ";
 
         const string TexteEs =
-@"SCRABBLE AUDIO, VERSIÓN 2.0
+@"SCRABBLE AUDIO, VERSIÓN 2.1
 
 Este juego se juega por completo con el teclado. Todo lo que dice pasa por su lector de pantalla, NVDA o JAWS, con su voz habitual. Sin lector de pantalla, toma el relevo la voz de Windows.
 Pulse Escape para cerrar esta ayuda.
@@ -215,7 +217,8 @@ EN EL TABLERO
 Las filas se llaman de la A a la O, de arriba abajo. Las columnas van del 1 al 15, de izquierda a derecha. La casilla central es H8.
 Flechas: moverse una casilla. Cada casilla se anuncia, por ejemplo: H8, vacía, palabra doble, o: H9, A.
 Ctrl+flecha: saltar hasta la siguiente ficha colocada en esa dirección.
-L: leer toda la fila. C: leer toda la columna.
+Intro: en la columna 1, lee toda la fila; en la fila A, lee toda la columna; en A1, las dos. Inicio le lleva a la columna 1. Si una palabra espera confirmación, Intro la confirma.
+L: leer toda la fila. C: leer toda la columna, esté donde esté.
 Colóquese en la casilla de partida y pulse Ctrl+V para colocar las fichas copiadas. Un menú pregunta la dirección: Horizontal o Vertical. Las teclas H y V eligen directamente.
 El juego coloca sus fichas saltando las casillas ya ocupadas. Por ejemplo, para escribir CASA cruzando una A ya colocada, seleccione C, S, A en el atril, cópielas, colóquese en la casilla de la C y pegue.
 Si pega un comodín, el juego le pregunta qué letra representa.

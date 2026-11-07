@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 [assembly: System.Reflection.AssemblyTitle("Scrabble audio")]
 [assembly: System.Reflection.AssemblyProduct("Scrabble audio")]
-[assembly: System.Reflection.AssemblyVersion("1.0.0.0")]
+[assembly: System.Reflection.AssemblyVersion("2.1.0.0")]
 
 namespace ScrabbleAudio
 {
