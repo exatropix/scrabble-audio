@@ -13,7 +13,7 @@ namespace ScrabbleAudio.Core
     public static class MiseAJour
     {
         public const string Depot = "exatropix/scrabble-audio";            // compte/dépôt sur GitHub
-        public const string VersionActuelle = "2.1";
+        public const string VersionActuelle = "2.2";
         public static string PageDepot { get { return "https://github.com/" + Depot + "/releases/latest"; } }
 
         public class Resultat

@@ -1,10 +1,10 @@
-## Nouveautés de la version 2.1
+## Nouveautés de la version 2.2
 
-- **Lire une ligne ou une colonne d'un coup** : sur le plateau, Entrée en colonne 1 lit toute la ligne, Entrée en ligne A lit toute la colonne, et en A1 les deux. La touche Début amène directement en colonne 1. Si un mot attend d'être validé, Entrée garde sa fonction de validation.
-- **Dictionnaire français** : retrait du mot « OK », qui ne fait pas partie de la liste officielle.
+- **Messages d'erreur détaillés** : si le jeu ne peut pas démarrer, la fenêtre d'erreur donne maintenant la cause réelle, la version de Windows et l'emplacement du dictionnaire. Le même texte est enregistré dans le fichier erreur.txt, dans le dossier AppData\Roaming\ScrabbleAudio. Envoyez-le-nous si vous rencontrez un problème.
+- **Démarrage plus robuste** : la préparation des lettres ne dépend plus des réglages régionaux de Windows.
 
-Téléchargez **ScrabbleAudio.zip**, puis le dictionnaire de votre langue, et décompressez-les dans le même dossier. Si vous aviez la version 2.0, il suffit de remplacer les fichiers du jeu ; le dictionnaire français n'est à reprendre que si vous voulez la correction.
+Les dictionnaires n'ont pas changé depuis la version 2.1 : si vous en avez déjà un, il suffit de remplacer les fichiers du jeu par ceux de **ScrabbleAudio.zip**.
 
 ---
 
-**Version 2.1.** On the board, Enter in column 1 reads the whole row, Enter in row A reads the whole column. **Versión 2.1.** En el tablero, Intro en la columna 1 lee toda la fila, Intro en la fila A lee toda la columna.
+**Version 2.2.** Detailed error messages (also saved to erreur.txt) and a more robust start-up. **Versión 2.2.** Mensajes de error detallados (también guardados en erreur.txt) y un arranque más robusto.

@@ -905,9 +905,11 @@ namespace ScrabbleAudio
         bool ChargerLexique(string code)
         {
             Cursor = Cursors.WaitCursor;
+            bool lettresPretes = false;
             try
             {
                 Lettres.Langue = code;
+                lettresPretes = true;
                 lex = Lexique.Charger(FichierMots(code));
                 Cursor = Cursors.Default;
                 return true;
@@ -916,7 +918,10 @@ namespace ScrabbleAudio
             {
                 Cursor = Cursors.Default;
                 lex = null;
-                MessageBox.Show(this, L.T("Le dictionnaire mots.txt est introuvable ou illisible :\n") + ex.Message, "Scrabble audio", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                string titre = lettresPretes ? L.T("Le dictionnaire mots.txt est introuvable ou illisible :\n") : "Erreur au démarrage du jeu (préparation des lettres) :\n";
+                string detail = Diagnostic.Decrire(ex, FichierMots(code));
+                string journal = Diagnostic.Enregistrer(dossierDonnees, titre + detail);
+                MessageBox.Show(this, titre + detail + (journal != null ? "\n\nCe texte est aussi enregistré dans le fichier :\n" + journal : ""), "Scrabble audio", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
         }

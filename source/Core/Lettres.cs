@@ -24,7 +24,7 @@ namespace ScrabbleAudio.Core
             return def.Split(' ').Select(t =>
             {
                 int x = t.IndexOf('x');
-                return new Jeton(t[0], int.Parse(t.Substring(1, x - 1)), int.Parse(t.Substring(x + 1)));
+                return new Jeton(t[0], int.Parse(t.Substring(1, x - 1), System.Globalization.CultureInfo.InvariantCulture), int.Parse(t.Substring(x + 1), System.Globalization.CultureInfo.InvariantCulture));
             }).ToArray();
         }
 
