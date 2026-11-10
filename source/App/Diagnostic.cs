@@ -17,7 +17,7 @@ namespace ScrabbleAudio
                 if (e.InnerException == null && e.StackTrace != null)
                 {
                     var lignes = e.StackTrace.Split('\n');
-                    for (int i = 0; i < lignes.Length && i < 4; i++) sb.Append("  ").Append(lignes[i].Trim()).Append("\n");
+                    for (int i = 0; i < lignes.Length && i < 12; i++) sb.Append("  ").Append(lignes[i].Trim()).Append("\n");
                 }
             }
             sb.Append("\nVersion du jeu : ").Append(Core.MiseAJour.VersionActuelle);
@@ -26,7 +26,7 @@ namespace ScrabbleAudio
             sb.Append("\nLangue de Windows : ").Append(System.Globalization.CultureInfo.CurrentCulture.Name)
               .Append(" / ").Append(System.Globalization.CultureInfo.CurrentUICulture.Name);
             sb.Append("\nDossier du jeu : ").Append(AppDomain.CurrentDomain.BaseDirectory);
-            try
+            if (fichier != null) try
             {
                 sb.Append("\nDictionnaire : ").Append(fichier ?? "?");
                 if (fichier != null) sb.Append(File.Exists(fichier) ? " (présent, " + new FileInfo(fichier).Length + " octets)" : " (absent)");
@@ -42,7 +42,8 @@ namespace ScrabbleAudio
             {
                 Directory.CreateDirectory(dossier);
                 string f = Path.Combine(dossier, "erreur.txt");
-                File.WriteAllText(f, DateTime.Now.ToString("yyyy-MM-dd HH:mm") + "\r\n" + texte.Replace("\n", "\r\n"), Encoding.UTF8);
+                if (File.Exists(f) && new FileInfo(f).Length > 200000) File.Delete(f);
+                File.AppendAllText(f, "==== " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "\r\n" + texte.Replace("\n", "\r\n") + "\r\n\r\n", Encoding.UTF8);
                 return f;
             }
             catch { return null; }

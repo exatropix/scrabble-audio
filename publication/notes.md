@@ -1,10 +1,10 @@
-## Nouveautés de la version 2.2
+## Nouveautés de la version 2.3
 
-- **Messages d'erreur détaillés** : si le jeu ne peut pas démarrer, la fenêtre d'erreur donne maintenant la cause réelle, la version de Windows et l'emplacement du dictionnaire. Le même texte est enregistré dans le fichier erreur.txt, dans le dossier AppData\Roaming\ScrabbleAudio. Envoyez-le-nous si vous rencontrez un problème.
-- **Démarrage plus robuste** : la préparation des lettres ne dépend plus des réglages régionaux de Windows.
+- **Plus de fenêtre d'erreur de Windows** : si une erreur imprévue se produit pendant la partie, le jeu l'explique dans une fenêtre simple, l'enregistre dans le fichier erreur.txt (dossier AppData\Roaming\ScrabbleAudio) et la partie peut continuer.
+- Le fichier erreur.txt garde maintenant l'historique des erreurs, avec leur date, au lieu de ne garder que la dernière.
 
-Les dictionnaires n'ont pas changé depuis la version 2.1 : si vous en avez déjà un, il suffit de remplacer les fichiers du jeu par ceux de **ScrabbleAudio.zip**.
+Les dictionnaires n'ont pas changé : il suffit de remplacer les fichiers du jeu par ceux de **ScrabbleAudio.zip**.
 
 ---
 
-**Version 2.2.** Detailed error messages (also saved to erreur.txt) and a more robust start-up. **Versión 2.2.** Mensajes de error detallados (también guardados en erreur.txt) y un arranque más robusto.
+**Version 2.3.** Unexpected errors are now explained, saved to erreur.txt, and no longer stop the game. **Versión 2.3.** Los errores imprevistos se explican, se guardan en erreur.txt y ya no detienen el juego.

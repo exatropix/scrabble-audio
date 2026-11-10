@@ -5,7 +5,7 @@ namespace ScrabbleAudio
     static class Aide
     {
         const string TexteFr =
-@"SCRABBLE AUDIO, VERSION 2.2
+@"SCRABBLE AUDIO, VERSION 2.3
 
 Ce jeu se joue entièrement au clavier. Tout ce qu'il annonce passe par votre lecteur d'écran, NVDA ou JAWS, avec votre voix habituelle. Sans lecteur d'écran, la voix de Windows prend le relais.
 Appuyez sur Échap pour fermer cette aide.
@@ -89,7 +89,7 @@ Les sons se trouvent dans le dossier sons. Vous pouvez remplacer chaque fichier 
 ";
 
         const string TexteEn =
-@"SCRABBLE AUDIO, VERSION 2.2
+@"SCRABBLE AUDIO, VERSION 2.3
 
 This game is played entirely from the keyboard. Everything it says goes through your screen reader, NVDA or JAWS, with your usual voice. Without a screen reader, the Windows voice takes over.
 Press Escape to close this help.
@@ -172,7 +172,7 @@ The sounds are in the sons folder. You can replace each file with your own, keep
 ";
 
         const string TexteEs =
-@"SCRABBLE AUDIO, VERSIÓN 2.2
+@"SCRABBLE AUDIO, VERSIÓN 2.3
 
 Este juego se juega por completo con el teclado. Todo lo que dice pasa por su lector de pantalla, NVDA o JAWS, con su voz habitual. Sin lector de pantalla, toma el relevo la voz de Windows.
 Pulse Escape para cerrar esta ayuda.
