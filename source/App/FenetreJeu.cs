@@ -98,8 +98,10 @@ namespace ScrabbleAudio
         {
             base.OnShown(e);
             zone.Focus();
+            Journal.Etape("Fenêtre affichée, langue du jeu : " + langueJeu);
             Parole.Dire(L.T("Scrabble audio. Chargement du dictionnaire."));
             if (!DicoInstalle(langueJeu)) langueJeu = Langues.FirstOrDefault(DicoInstalle);
+            Journal.Etape("Dictionnaire choisi : " + (langueJeu ?? "aucun") + (langueJeu != null ? " (" + FichierMots(langueJeu) + ")" : ""));
             if (langueJeu == null)
             {
                 MessageBox.Show(this, L.T("Aucun dictionnaire n'est installé. Téléchargez-en un sur la page du jeu, puis décompressez-le dans le dossier du jeu."), "Scrabble audio", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -107,10 +109,12 @@ namespace ScrabbleAudio
             }
             // Une partie sauvegardée se reprend dans sa langue
             string langueSauvee = LangueSauvegarde();
-            if (!ChargerLexique(langueSauvee != null && DicoInstalle(langueSauvee) ? langueSauvee : langueJeu)) { fermetureAutorisee = true; Close(); return; }
+            if (!ChargerLexique(langueSauvee != null && DicoInstalle(langueSauvee) ? langueSauvee : langueJeu)) { Journal.Etape("Échec du chargement, fermeture"); fermetureAutorisee = true; Close(); return; }
+            Journal.Etape("Dictionnaire chargé : " + lex.NombreMots + " mots");
 
             if (File.Exists(cheminSauvegarde))
             {
+                Journal.Etape("Partie sauvegardée trouvée, question posée");
                 var r = MessageBox.Show(this, L.T("Une partie sauvegardée existe. Voulez-vous la reprendre ?"), L.T("Reprendre la partie"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (r == DialogResult.Yes)
                 {
@@ -144,11 +148,13 @@ namespace ScrabbleAudio
                 Parole.Dire(L.T("Scrabble audio. Chargement du dictionnaire."));
                 if (!ChargerLexique(langueJeu)) return;
             }
+            Journal.Etape("Choix du niveau");
             var niveau = Dialogues.ChoisirNiveau(this, partie != null ? partie.Niveau : Niveau.Moyen);
+            Journal.Etape("Niveau choisi : " + (niveau.HasValue ? niveau.Value.ToString() : "annulé"));
             if (niveau == null)
             {
-                if (auDemarrage) { fermetureAutorisee = true; Close(); }
-                else PlusTard(300, () => Parole.Dire(L.T("Nouvelle partie annulée.")));
+                // Le jeu ne se ferme plus tout seul : on explique comment relancer une partie.
+                PlusTard(300, () => Parole.Dire(L.T("Nouvelle partie annulée.") + L.T(" Ctrl+N pour une nouvelle partie, Ctrl+Q pour quitter.")));
                 return;
             }
             partie = Partie.Nouvelle(niveau.Value, rnd);
@@ -874,15 +880,26 @@ namespace ScrabbleAudio
             string r;
             if (dicosTrouves.TryGetValue(code, out r)) return r;
             r = null;
-            try
+            // Recherche limitée à 4 niveaux, en sautant les dossiers inaccessibles (utile si le jeu est posé dans Documents)
+            var pile = new Stack<KeyValuePair<string, int>>();
+            pile.Push(new KeyValuePair<string, int>(dossierJeu, 0));
+            int vus = 0;
+            while (pile.Count > 0 && r == null && vus < 3000)
             {
-                foreach (var f in Directory.EnumerateFiles(dossierJeu, "mots.txt", SearchOption.AllDirectories))
+                var d = pile.Pop(); vus++;
+                try
                 {
-                    var dir = new DirectoryInfo(Path.GetDirectoryName(f));
-                    if (dir.Name.Equals(code, StringComparison.OrdinalIgnoreCase) && dir.Parent != null && dir.Parent.Name.Equals("dictionnaires", StringComparison.OrdinalIgnoreCase)) { r = f; break; }
+                    string f = Path.Combine(d.Key, "dictionnaires", code, "mots.txt");
+                    if (File.Exists(f)) { r = f; break; }
+                    if (d.Value < 4)
+                        foreach (var sous in Directory.GetDirectories(d.Key))
+                        {
+                            try { if ((new DirectoryInfo(sous).Attributes & FileAttributes.ReparsePoint) != 0) continue; } catch { continue; }
+                            pile.Push(new KeyValuePair<string, int>(sous, d.Value + 1));
+                        }
                 }
+                catch { }
             }
-            catch { }
             if (r != null) dicosTrouves[code] = r;
             return r;
         }
@@ -921,6 +938,7 @@ namespace ScrabbleAudio
                 string titre = lettresPretes ? L.T("Le dictionnaire mots.txt est introuvable ou illisible :\n") : "Erreur au démarrage du jeu (préparation des lettres) :\n";
                 string detail = Diagnostic.Decrire(ex, FichierMots(code));
                 string journal = Diagnostic.Enregistrer(dossierDonnees, titre + detail);
+                Journal.Etape("Erreur de chargement : " + detail.Replace("\n", " | "));
                 MessageBox.Show(this, titre + detail + (journal != null ? "\n\nCe texte est aussi enregistré dans le fichier :\n" + journal : ""), "Scrabble audio", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }

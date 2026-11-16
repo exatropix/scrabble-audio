@@ -38,6 +38,15 @@ namespace ScrabbleAudio
         /// <summary>Écrit le texte dans erreur.txt ; renvoie le chemin, ou null en cas d'échec.</summary>
         public static string Enregistrer(string dossier, string texte)
         {
+            string ici = null;
+            try { ici = EcrireDans(AppDomain.CurrentDomain.BaseDirectory, texte); } catch { }
+            string la = null;
+            try { la = EcrireDans(dossier, texte); } catch { }
+            return ici ?? la;
+        }
+
+        static string EcrireDans(string dossier, string texte)
+        {
             try
             {
                 Directory.CreateDirectory(dossier);
